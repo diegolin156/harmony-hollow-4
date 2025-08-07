@@ -708,10 +708,10 @@
       <h1 class="large-title">🌸 Elegí tu personaje 🌸</h1>
       <div class="character-options">
         <div class="char-card" tabindex="0" data-name="Julián">
-          <img src="julian.png" alt="Julián"><div class="char-name large-text">Julián</div>
+          <img src="julian.jpeg" alt="Julián"><div class="char-name large-text">Julián</div>
         </div>
         <div class="char-card" tabindex="0" data-name="Julita">
-          <img src="julita.png" alt="Julita"><div class="char-name large-text">Julita</div>
+          <img src="julita.jpeg" alt="Julita"><div class="char-name large-text">Julita</div>
         </div>
         <div class="char-card" tabindex="0" data-name="Zinki">
           <img src="sinky.png" alt="Zinki"><div class="char-name large-text">Zinki</div>
@@ -780,7 +780,7 @@
   <div id="memory-congrats" class="congrats-screen hidden">
     <div class="congrats-box large">
       <h2 class="large-title">¡Genial! 🎉</h2>
-      <p class="large-text">Encontraste todos los pares.</p>
+      <p class="large-text"></p>
       <button class="btn btn-large" id="memory-congrats-btn"><i class="fas fa-check"></i> Continuar</button>
     </div>
   </div>
@@ -788,7 +788,7 @@
   <div id="puzzle-congrats" class="congrats-screen hidden">
     <div class="congrats-box large">
       <h2 class="large-title">¡Excelente! 🎉</h2>
-      <p class="large-text">Armado completo.</p>
+      <p class="large-text"></p>
       <button class="btn btn-large" id="puzzle-congrats-btn"><i class="fas fa-check"></i> Continuar</button>
     </div>
   </div>
@@ -796,7 +796,7 @@
   <div id="ispy-congrats" class="congrats-screen hidden">
     <div class="congrats-box large">
       <h2 class="large-title">¡Perfecto! 🎉</h2>
-      <p class="large-text">Encontraste al personaje.</p>
+      <p class="large-text"></p>
       <button class="btn btn-large" id="ispy-congrats-btn"><i class="fas fa-check"></i> Continuar</button>
     </div>
   </div>
@@ -804,12 +804,37 @@
   <script>
     // Personajes + acentos
     const personajes = [
-      {name:'Julián', image:'julian.png', accent:'#5890ff'},
-      {name:'Julita', image:'julita.png', accent:'#ef6e6e'},
+      {name:'Julián', image:'julian.jpeg', accent:'#5890ff'},
+      {name:'Julita', image:'julita.jpeg', accent:'#ef6e6e'},
       {name:'Zinki',  image:'sinky.png',  accent:'#b28dff'},
       {name:'Azu',    image:'azu.png',    accent:'#ffc66b'},
       {name:'Boort',  image:'boort.png',  accent:'#ff7b00'},
       {name:'Cari',   image:'cari.png',   accent:'#d0b15b'}
+    ];
+
+    // Frases de felicitación
+    const frases = [
+      "Recordá: cambies lo real por lo aceptado.🩷",
+      "Lo mejor que podés ser… es vos.✨",
+      "Tu autenticidad es tu superpoder.✨",
+      "Ser diferente no es raro, es valiente.🫶🏼",
+      "No sos demasiado nada. Sos justo quien tenés que ser.💓",
+      "Siempre se fiel a vos misma✨",
+      "Ser uno mismo es el primer acto de libertad.🤍",
+      "Querete como querés que te quieran.",
+      "Merecés lo mejor, empezá por dártelo.",
+      "Ser vos no es un error, es un regalo.",
+      "Valés incluso en tus días más grises.",
+      "Sos suficiente, tal como sos.",
+      "Tu voz merece ser escuchada.",
+      "Escuchar también es una forma de cuidar.",
+      "Podemos pensar distinto y seguir siendo equipo.",
+      "Amistad es elegirnos sin condiciones.",
+      "Una amistad real no juzga, acompaña.",
+      "Lo que te hace diferente, te hace necesario.",
+      "La diversidad nos completa.",
+      "Nadie queda afuera si el amor está adentro.",
+      "Cada paso que damos hacia adentro es libertad."
     ];
 
     let selectedCharacter = null;
@@ -1125,9 +1150,18 @@
       }
     }
 
-    // 6) Felicitaciones
+    // 6) Felicitaciones - ahora con frases aleatorias
     function showCongrats(mode){
-      document.getElementById(`${mode}-congrats`).classList.remove('hidden');
+      const congratsElement = document.getElementById(`${mode}-congrats`);
+      // Seleccionar un mensaje aleatorio
+      const randomIndex = Math.floor(Math.random() * frases.length);
+      const fraseAleatoria = frases[randomIndex];
+
+      // Actualizar el texto
+      const p = congratsElement.querySelector('.large-text');
+      p.textContent = fraseAleatoria;
+
+      congratsElement.classList.remove('hidden');
     }
 
     // Util barajar
